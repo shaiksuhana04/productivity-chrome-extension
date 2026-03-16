@@ -16,7 +16,7 @@ const success = document.getElementById("save-successful");
 
 function defaultPrefs(){
   return {
-    siteList:["facebook.com","youtube.com","twitter.com","reddit.com"],
+    siteList:["facebook.com","youtube.com","twitter.com","reddit.com","netflix.com","instagram.com"],
     durations:{ work:1500, break:300 },
     showNotifications:true,
     shouldRing:true,

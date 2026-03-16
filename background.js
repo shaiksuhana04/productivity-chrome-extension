@@ -19,7 +19,9 @@ function defaultPrefs() {
       "facebook.com",
       "youtube.com",
       "twitter.com",
-      "reddit.com"
+      "reddit.com",
+      "netflix.com",
+      "instagram.com"
     ],
     durations: { work: 60, break: 60 },
     shouldRing: true,
