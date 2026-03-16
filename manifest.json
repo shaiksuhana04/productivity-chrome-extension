@@ -4,25 +4,40 @@
   "description": "__MSG_ext_description__",
   "version": "1.7.0",
   "default_locale": "en",
+
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+
   "action": {
     "default_icon": "icons/work_pending.png"
   },
+
   "options_page": "options.html",
-  "permissions": ["notifications", "tabs", "alarms", "storage"],
+
+  "permissions": [
+    "tabs",
+    "storage",
+    "alarms",
+    "notifications",
+    "scripting",
+    "offscreen"
+  ],
+
   "host_permissions": ["<all_urls>"],
+
   "background": {
     "service_worker": "background.js"
   },
+
   "web_accessible_resources": [
     {
       "resources": [
         "icons/work_full.png",
-        "icons/break_full.png"
+        "icons/break_full.png",
+        "ring.ogg"
       ],
       "matches": ["<all_urls>"]
     }

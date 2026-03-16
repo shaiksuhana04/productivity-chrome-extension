@@ -1,150 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title data-i18n="options_title"></title>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ProductiX Settings</title>
 
-    <link rel="stylesheet" href="chrome://resources/css/widgets.css">
-    <style type="text/css">
-      body {
-        background: url(icons/work_full.png) no-repeat fixed right bottom;
-        font-family: 'Lucida Grande', sans-serif;
-        color: rgb(48, 57, 66);
-        -webkit-user-select: none;
-        padding: 1.5em;
-        margin: 0;
-      }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-      p {
-        width: 31em;
-      }
+<style>
 
-      h1 {
-        margin-top: 0;
-        font-size: 2.05em;
-        font-weight: normal;
-      }
+*{
+box-sizing:border-box;
+font-family: Inter, system-ui, sans-serif;
+}
 
-      #site-list-wrapper {
-        margin-bottom: 2em;
-      }
+body{
+margin:0;
+min-height:100vh;
+padding:60px 20px;
 
-      #site-list-header {
-        font-weight: bold;
-        margin-bottom: .25em;
-      }
+display:flex;
+justify-content:center;
+align-items:flex-start;
 
-      #site-list {
-        height: 16em;
-        width: 30em;
-        padding: 5px;
-        font: -webkit-control;
-      }
+/* ⭐ PREMIUM CALM BG */
+background:
+radial-gradient(circle at 15% 20%, #f0ebe7 0%, transparent 40%),
+radial-gradient(circle at 85% 80%, #ece6df 0%, transparent 40%),
+linear-gradient(135deg,#f7f5f2 0%, #e9eef5 100%);
+}
 
-      #site-list-wrapper .note {
-        width: 33em;
-      }
+.card{
+width:760px;
+background:rgba(255,255,255,0.7);
+backdrop-filter: blur(30px);
+border-radius:28px;
+padding:48px;
 
-      #save-successful {
-        color: green;
-        display: none;
-        margin-left: 1em;
-      }
+box-shadow:
+0 40px 80px rgba(0,0,0,0.08),
+0 10px 30px rgba(0,0,0,0.05),
+inset 0 1px 0 rgba(255,255,255,0.6);
+}
 
-      #time-format-error {
-        color: red;
-        display: none;
-      }
+h1{
+margin:0 0 40px 0;
+font-size:32px;
+font-weight:700;
+letter-spacing:-0.5px;
+}
 
-      #save-successful.show, #time-format-error.show {
-        display: inline;
-      }
+.section{
+margin-top:34px;
+}
 
-      #work-block-info {
-        color: red;
-        display: none;
-        width: 25em;
-      }
+.section-title{
+font-size:18px;
+font-weight:600;
+margin-bottom:14px;
+color:#2c2c2c;
+}
 
-      body.work #work-block-info {
-        display: block;
-      }
+select{
+padding:8px 14px;
+border-radius:10px;
+border:1px solid #ddd;
+background:white;
+font-weight:500;
+}
 
-      div {
-        margin-bottom: .7em;
-      }
+textarea{
+width:100%;
+height:150px;
+border-radius:18px;
+border:1px solid #e6e6e6;
+padding:16px;
+font-size:14px;
+background:#fbfbfb;
+}
 
-      #durations label {
-        font-weight: bold;
-        margin-left: 0;
-      }
+.row{
+display:flex;
+gap:30px;
+}
 
-      #durations .minutes {
-        font-size: 85%;
-        margin-right: 1.5em;
-      }
+.input-group{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:500;
+}
 
-      .note {
-        font-size: 75%;
-      }
+input[type="text"]{
+width:90px;
+padding:12px;
+border-radius:12px;
+border:1px solid #e6e6e6;
+background:#fbfbfb;
+}
 
-      label {
-        margin-left: 0.3em;
-      }
+.toggle{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#fbfbfb;
+padding:16px 18px;
+border-radius:16px;
+margin-top:12px;
+}
 
-      label .note {
-        margin-left: 2em;
-        margin-top: 0.3em;
-        margin-bottom: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <h1 data-i18n="options_title"></h1>
-    <p id="work-block-info" data-i18n="options_work_block_info"></p>
-    <form id="options-form">
-      <div id="site-list-wrapper">
-        <header id="site-list-header">
-          <select id="blacklist-or-whitelist">
-            <option data-i18n="options_blacklist_verb"></option>
-            <option data-i18n="options_whitelist_verb"></option>
-          </select>
-          <span data-i18n="options_site_list_header"></span>
-        </header>
-        <textarea id="site-list"></textarea>
-        <p class="note" data-i18n="options_site_list_info"></p>
-        <p class="note" data-i18n="options_site_list_syntax"></p>
-      </div>
-      <div id="durations">
-        <label for="work-duration">
-          <span data-i18n="work" data-i18n-caps></span>:
-        </label>
-        <input id="work-duration" type="text" size="2" />
-        <span class="minutes" data-i18n="minutes"></span>
-        <label for="break-duration">
-          <span data-i18n="break" data-i18n-caps></span>:
-        </label>
-        <input id="break-duration" type="text" size="2" />
-        <span class="minutes" data-i18n="minutes"></span>
-        <span id="time-format-error" data-i18n="options_time_format_error"></span>
-      </div>
-      <div>
-        <input id="show-notifications" type="checkbox" />
-        <label for="show-notifications" data-i18n="options_show_notifications"></label>
-      </div>
-      <div>
-        <input id="should-ring" type="checkbox" />
-        <label for="should-ring" data-i18n="options_should_ring"></label>
-      </div>
-      <div>
-        <input id="click-restarts" type="checkbox" />
-        <label for="click-restarts">
-          <span data-i18n="options_click_restarts"></span>
-          <p class="note" data-i18n="options_click_restarts_note"></p>
-        </label>
-      </div>
-      <button type="submit" id="save-button" data-i18n="options_save_changes"></button>
-      <span id="save-successful" data-i18n="options_save_successful"></span>
-    </form>
-    <script type="text/javascript" src="options.js"></script>
-  </body>
+.button-row{
+display:flex;
+gap:16px;
+margin-top:34px;
+}
+
+.primary-btn{
+flex:1;
+padding:18px;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#ff7a5c,#ff5c3d);
+color:white;
+font-size:17px;
+font-weight:600;
+cursor:pointer;
+}
+
+.secondary-btn{
+flex:1;
+padding:18px;
+border:none;
+border-radius:18px;
+background:#ececec;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+}
+
+.success{
+display:none;
+margin-top:14px;
+color:#2ecc71;
+font-weight:600;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>🍅 Focus Settings</h1>
+
+<form id="options-form">
+
+<div class="section">
+<div class="section-title">Distracting Websites</div>
+
+<select id="blacklist-or-whitelist">
+<option>Block these sites</option>
+<option>Allow only these sites</option>
+</select>
+
+<textarea id="site-list"></textarea>
+</div>
+
+<div class="section">
+<div class="section-title">Timer Duration</div>
+
+<div class="row">
+
+<div class="input-group">
+<label>Work</label>
+<input id="work-duration" type="text">
+<span>min</span>
+</div>
+
+<div class="input-group">
+<label>Break</label>
+<input id="break-duration" type="text">
+<span>min</span>
+</div>
+
+</div>
+</div>
+
+<div class="section">
+<div class="section-title">Behaviour</div>
+
+<div class="toggle">
+<span>Show Notification</span>
+<input id="show-notifications" type="checkbox">
+</div>
+
+<div class="toggle">
+<span>Play Alarm Sound</span>
+<input id="should-ring" type="checkbox">
+</div>
+
+<div class="toggle">
+<span>Click Restarts Timer</span>
+<input id="click-restarts" type="checkbox">
+</div>
+
+</div>
+
+<div class="button-row">
+<button class="primary-btn" type="submit">Save Settings</button>
+<button class="secondary-btn" id="reset-btn" type="button">Reset Default</button>
+</div>
+
+<div id="save-successful" class="success">Saved ✓</div>
+
+</form>
+
+</div>
+
+<script src="options.js"></script>
+
+</body>
 </html>

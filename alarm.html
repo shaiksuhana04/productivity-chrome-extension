@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+const audio = new Audio(chrome.runtime.getURL("ring.ogg"));
+audio.play();
+setTimeout(()=>window.close(),3000);
+</script>
+</body>
+</html>
